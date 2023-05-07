@@ -40,7 +40,7 @@ way[highway][!name]
     color: gray;
 }
 
-way[de:strassenschluesse_exists = no]
+way[highway][name][de:strassenschluessel_exists=no]
 {
     color: gray;
 }
