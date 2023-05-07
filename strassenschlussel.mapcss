@@ -1,0 +1,39 @@
+ /*
+    Qualitätsampel für die Erfassung von Straßenschlüssel
+    
+    
+    Grau:    Straßen ohne Namen
+
+    Schwarz: Straße ohne offizellen Straßenschlüssel
+             
+    Grün:    Straßenschlüssel vorhanden
+    
+    Rot:     Straßenschlüssel fehlt
+              
+    
+*/
+
+
+
+way[highway]
+{
+    width: 8;
+    color: crimson;
+}
+
+
+way[highway][!name]
+{
+    color: gray;
+}
+
+way[highway][name][de:strassenschluessel_exists=no]
+{
+    color: black;
+}
+
+way[highway][de:strassenschluessel]
+{
+    color: green;
+}
+
