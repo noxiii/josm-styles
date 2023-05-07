@@ -1,0 +1,92 @@
+ /*
+    Qualitätsampel für die Erfassung von Herkunft und Bedeutung der Straßennamen
+    Basierend auf https://overpass-turbo.eu/s/145D
+    
+    Grau:    Straße ohne offizellen Straßenschlüssel, keine Herkunftsrecherche
+             de:strassenschluesse_exists = no
+             
+    Blau:    Keine Einträge bei Wikidata oder Wikipedia, aber Text zur Namensherkunft
+             name:etymology:description
+    
+    Grün:    Zwei Einträge zur Namensherkunft
+             name:etymology:wikidata 
+              und 
+             name:etymology:wikipedia erfasst
+    
+    Gelb:    Mindestens eins eingetragen
+             name:etymology:wikidata
+              oder
+             name:etymology:wikipedia
+          
+    Orange:  Zwei Einträge zu fehlender Namensherkunft      
+             name:etymology:wikidata:missing 
+              und 
+             name:etymology:wikipedia:missing erfasst
+            
+    Rot:     Der Rest          
+              
+    
+*/
+
+way[highway]
+{
+    width: 8;
+    color: crimson;
+}
+
+
+way[highway][!name]
+{
+    color: gray;
+}
+
+way[de:strassenschluesse_exists = no]
+{
+    color: gray;
+}
+
+way[highway][name:etymology:wikidata][name:etymology:wikipedia]
+{
+    color: green;
+}
+
+way[highway][name:etymology:wikidata][!name:etymology:wikipedia]
+{
+    color: yellow;
+}
+
+way[highway][name:etymology:wikidata:missing][name:etymology:wikipedia]
+{
+    color: yellow;
+}
+
+way[highway][name:etymology:wikidata][name:etymology:wikipedia:missing] 
+{
+    color: yellow;
+}
+
+way[highway][!name:etymology:wikidata][name:etymology:wikipedia]
+{
+    color: yellow;
+}
+
+way[highway][name:etymology:wikidata:missing][name:etymology:wikipedia:missing]
+{
+    color: orange;
+}
+
+way[highway][name:etymology:wikidata:missing][!name:etymology:wikipedia][!name:etymology:wikipedia:missing]
+{
+    color: orange;
+}
+
+way[highway][!name:etymology:wikidata:missing][!name:etymology:wikidata][name:etymology:wikipedia:missing]
+{
+    color: orange;
+}
+
+way[highway][!name:etymology:wikidata][!name:etymology:wikipedia][!name:etymology:wikidata:missing][!name:etymology:wikipedia:missing][name:etymology:description]
+{
+    color: blue;
+}
+
